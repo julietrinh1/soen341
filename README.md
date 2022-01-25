@@ -10,12 +10,12 @@ This web application allows users to purchase items online. Users must create an
 
 ## Team Members
 
-* Mohammad Afandi
-* Jasmit Kalsi
-* William Chong
-* Julie Trinh
-* Adam Qamar
-* Kevin Marnet Scanlan 
+* Mohammad Afandi (AfandiM)
+* Jasmit Kalsi (Kalsij)
+* William Chong (Chovv)
+* Julie Trinh (julietrinh1)
+* Adam Qamar (aqa02)
+* Kevin Marnet Scanlan (GuardiansAscend)
 
 
 ## Technologies
