@@ -11,12 +11,12 @@ The core features of this project are browsing through the products offered by t
 
 ## Team Members
 
-* Mohammad Afandi
-* Jasmit Kalsi
-* William Chong
-* Julie Trinh
-* Adam Qamar
-* Kevin Marnet Scanlan 
+* Mohammad Afandi (AfandiM)
+* Jasmit Kalsi (Kalsij)
+* William Chong (Chovv)
+* Julie Trinh (julietrinh1)
+* Adam Qamar (aqa02)
+* Kevin Marnet Scanlan (GuardiansAscend)
 
 
 ## Technologies
