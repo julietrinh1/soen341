@@ -21,21 +21,8 @@ The core features of this project are browsing through the products offered by t
 
 
 ## Technologies
-TBD
-Ideas for Front-end: 
+Front-End: React.js
 
-- Angular
+Back-End: Node.js
 
-- React.js
-
-- Vue.js
-
-(All the above are JavaScript frameworks) 
-
-Ideas for Back-end:  
-
-- Node.js (JavaScript)
-
-- Django / Flask (Python)
-
-- Spring (Java)
+Database: MySQL
