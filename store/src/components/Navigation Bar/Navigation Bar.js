@@ -21,14 +21,14 @@ const pages = ['Home', 'Products', 'Contact Us'];
 const settings = ['Profile', 'My Cart', 'Logout'];
 
 const Navbar = () => {
-    
+
     const [state, setState] = React.useState(false);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
     const handleOpenNavMenu = () => {
         setState(true);
     };
-    
+
     const handleCloseNavMenu = () => {
         setState(false);
     };
@@ -42,20 +42,20 @@ const Navbar = () => {
     };
 
     const Sidebar = () => (
-            <Box
-                sx={{ width: 250 }}
-                onClick={handleCloseNavMenu}
-            >
-                <List>
-                    {pages.map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
-                </List>
-            </Box>
+        <Box
+            sx={{ width: 250 }}
+            onClick={handleCloseNavMenu}
+        >
+            <List>
+                {pages.map((text, index) => (
+                    <ListItem button key={text}>
+                        <ListItemIcon>
+                        </ListItemIcon>
+                        <ListItemText primary={text} />
+                    </ListItem>
+                ))}
+            </List>
+        </Box>
     );
 
     return (
@@ -79,9 +79,9 @@ const Navbar = () => {
                             <MenuIcon />
                         </IconButton>
                         <Drawer
-                        anchor="left"
-                        open={state}
-                        onClose={handleCloseNavMenu}
+                            anchor="left"
+                            open={state}
+                            onClose={handleCloseNavMenu}
                         >
                             {Sidebar()}
                         </Drawer>
