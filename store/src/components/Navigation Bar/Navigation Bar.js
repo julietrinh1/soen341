@@ -17,8 +17,9 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import useStyles from './styles';
+import { Link } from 'react-router-dom';
 
-const pages = ['Home', 'Products', 'Contact Us'];
+const pages = [['Home', '/'], ['Products', '/Products'], ['Contact Us', '/']];
 const settings = ['Profile', 'My Cart', 'Logout'];
 
 const Navbar = () => {
@@ -50,7 +51,7 @@ const Navbar = () => {
         >
             <List>
                 {pages.map((text, index) => (
-                    <ListItem button key={text}>
+                    <ListItem component={Link} to="/Products" button key={text}>
                         <ListItemIcon>
                         </ListItemIcon>
                         <ListItemText primary={text} />
@@ -99,16 +100,18 @@ const Navbar = () => {
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
                             <Button
-                                key={page}
+                                component={Link}
+                                to={page[1]}
+                                key={page[0]}
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: 'inherit', display: 'block' }}
-                            >
-                                {page}
+                                >
+                                {page[0]}
                             </Button>
                         ))}
                     </Box>
 
-                    <Box sx={{ flexGrow: 0 }}>
+                    <Box sx={{ flexGrow: 0 , display:'none'}} >
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                                 <Avatar alt="Lorem Ipsum" src="" />
@@ -126,6 +129,15 @@ const Navbar = () => {
                                 </MenuItem>
                             ))}
                         </Menu>
+                    </Box>
+                    <Box sx={{ flexGrow: 0 }} >
+                        <IconButton 
+                            component={Link} 
+                            to={"/signin"} 
+                            sx={{ my: 2, color: 'inherit', display: 'block', p: 0 }}
+                            >
+                            <Avatar alt="Lorem Ipsum" src="" />
+                        </IconButton>
                     </Box>
                 </Toolbar>
             </Container>
