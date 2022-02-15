@@ -16,11 +16,13 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import useStyles from './styles';
 
 const pages = ['Home', 'Products', 'Contact Us'];
 const settings = ['Profile', 'My Cart', 'Logout'];
 
 const Navbar = () => {
+    useStyles();
 
     const [state, setState] = React.useState(false);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -59,7 +61,7 @@ const Navbar = () => {
     );
 
     return (
-        <AppBar position="absolute" color="default">
+        <AppBar position="fixed" color="default">
             <Container maxWidth="false">
                 <Toolbar disableGutters>
                     <Typography
