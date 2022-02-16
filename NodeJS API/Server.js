@@ -14,5 +14,4 @@ const usersRouter = require("./UserController");
 
 app.use('/users', usersRouter);
 
-
 app.listen(port, () => console.log("Server Started"));
