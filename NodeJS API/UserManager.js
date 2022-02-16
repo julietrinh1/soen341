@@ -27,4 +27,21 @@ exports.getUserByEmail = async function getUserByEmail(email){
 exports.createUser = async function createUser(user){
     await client.connect();
     return await client.db("users").collection("normalUser").insertOne(user);
+async function getAllUsers(){
+    await client.connect();
+    return client.db("users").collection("normalUser").find({firstName=""})
+}
+
+async function getUser(id){
+    await client.connect();
+    return await client.db("users").collection("normalUser").find()
+}
+
+async function createUser(user){
+    await client.connect();
+    return await client.db("users").collection("normalUser").insertOne(user)
+}
+
+module.exports = {
+    listAllUsers: getAllUsers()
 }

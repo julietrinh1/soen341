@@ -9,6 +9,8 @@ router.get('/', async (req, res) => {
         const users = await userManager.getAllUsers();
         console.log(users);
         res.send(users);
+        const users = await userManager.listAllUsers;
+        res.json(users);
     }
     catch(e){
         res.status(500).json({message: e.message});
