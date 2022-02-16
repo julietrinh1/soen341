@@ -51,10 +51,10 @@ const Navbar = () => {
         >
             <List>
                 {pages.map((text, index) => (
-                    <ListItem component={Link} to="/Products" button key={text}>
+                    <ListItem component={Link} to={text[1]} button key={text[0]}>
                         <ListItemIcon>
                         </ListItemIcon>
-                        <ListItemText primary={text} />
+                        <ListItemText  primary={text[0]} />
                     </ListItem>
                 ))}
             </List>

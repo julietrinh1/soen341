@@ -1,12 +1,14 @@
 const express = require('express');
+const { getUserByEmail } = require('./UserManager');
 const router = express.Router();
 const userManager = require("./UserManager");
 
 //Get all users
 router.get('/', async (req, res) => {
     try{
-        const users = await userManager.listAllUsers;
-        res.json(users);
+        const users = await userManager.getAllUsers();
+        console.log(users);
+        res.send(users);
     }
     catch(e){
         res.status(500).json({message: e.message});
@@ -21,6 +23,51 @@ router.get('/:id', (req, res) => {
 //Create user
 router.post('/', (req, res) => {
     
+})
+
+//Check if user exists
+router.post('/usercheck', async (req, res) => {
+    getUserByEmail(req.body.email).then(user => {
+        if(!user){
+            res.send(null)
+        }
+        else{
+            res.send(user);
+        }
+    });
+})
+
+//Handle user sign in
+router.post('/userlogin', async (req, res) => {
+    getUserByEmail(req.body.email).then(user => {
+        if(!user){
+            res.send(null);
+        }
+        else if(req.body.password === user.password){
+            console.log(user)
+            res.send(user);
+        }
+        else{
+            res.send(null);
+        }
+    });
+})
+
+//Handle user register
+router.post('/usersignup', async (req, res) => {
+    getUserByEmail(req.body.email).then(user => {
+        if(!user){
+            console.log("signing up");
+            userManager.createUser(user).then(user => {
+                res.send(user);
+            }).catch(e => {
+                res.status(500).send(e);
+            });
+        }
+        else{
+            res.send(null);
+        }
+    });
 })
 
 //Update user

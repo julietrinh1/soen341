@@ -14,21 +14,17 @@ async function createNormalUser(client){
         lastName: "LastName"
     })
 }
-async function getAllUsers(){
+exports.getAllUsers = async function getAllUsers(){
     await client.connect();
-    return client.db("users").collection("normalUser").find({firstName=""})
+    return client.db("users").collection("normalUser").find().toArray();
 }
 
-async function getUser(id){
+exports.getUserByEmail = async function getUserByEmail(email){
     await client.connect();
-    return await client.db("users").collection("normalUser").find()
+    return await client.db("users").collection("normalUser").findOne({email:email});
 }
 
-async function createUser(user){
+exports.createUser = async function createUser(user){
     await client.connect();
-    return await client.db("users").collection("normalUser").insertOne(user)
-}
-
-module.exports = {
-    listAllUsers: getAllUsers()
+    return await client.db("users").collection("normalUser").insertOne(user);
 }
