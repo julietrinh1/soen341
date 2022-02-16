@@ -21,12 +21,14 @@ import { Link } from 'react-router-dom';
 
 const pages = [['Home', '/'], ['Products', '/Products'], ['Contact Us', '/']];
 const settings = ['Profile', 'My Cart', 'Logout'];
+const productlist = ['Shoes', 'Shirts', 'Pants'];
 
 const Navbar = () => {
     useStyles();
 
     const [state, setState] = React.useState(false);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const [anchorElProduct, setAnchorElProduct] = React.useState(null);
 
     const handleOpenNavMenu = () => {
         setState(true);
@@ -43,6 +45,13 @@ const Navbar = () => {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
+    const handleOpenProductMenu = (event) => {
+        setAnchorElProduct(event.currentTarget);
+    };
+
+    const handleCloseProductMenu = () => {
+        setAnchorElProduct(null);
+    };
 
     const Sidebar = () => (
         <Box
@@ -51,10 +60,8 @@ const Navbar = () => {
         >
             <List>
                 {pages.map((text, index) => (
-                    <ListItem component={Link} to="/Products" button key={text}>
-                        <ListItemIcon>
-                        </ListItemIcon>
-                        <ListItemText primary={text} />
+                    <ListItem component = {Link} to = {text[1]} button key={text}>
+                        <ListItemText component primary={text[0]} />
                     </ListItem>
                 ))}
             </List>
@@ -98,17 +105,44 @@ const Navbar = () => {
                         LOGO
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page) => (
-                            <Button
+                            <Button name = "home"
                                 component={Link}
-                                to={page[1]}
-                                key={page[0]}
+                                to={pages[0][1]}
+                                key={pages[0][1]}
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: 'inherit', display: 'block' }}
                                 >
-                                {page[0]}
+                                {pages[0][0]}
                             </Button>
-                        ))}
+
+                            <Button name = "products"
+                                key={pages[0][1]}
+                                onClick={handleOpenProductMenu}
+                                sx={{ my: 2, color: 'inherit', display: 'block' }}
+                                >
+                                {pages[1][0]}
+                            </Button>
+                            <Menu
+                            anchorEl={anchorElProduct}
+                            keepMounted
+                            open={Boolean(anchorElProduct)}
+                            onClose={handleCloseProductMenu}
+                            >
+                            {productlist.map((products) => (
+                                <MenuItem key={products} onClick={handleCloseProductMenu}>
+                                    <Typography textAlign="center">{products}</Typography>
+                                </MenuItem>
+                            ))}
+                        </Menu>
+                            <Button name = "contactus"
+                                component={Link}
+                                to={pages[2][1]}
+                                key={pages[2][0]}
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: 'inherit', display: 'none' }}
+                               >
+                                {pages[2][0]}
+                            </Button>
                     </Box>
 
                     <Box sx={{ flexGrow: 0 , display:'none'}} >
