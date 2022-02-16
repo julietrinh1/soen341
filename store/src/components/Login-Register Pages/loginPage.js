@@ -9,27 +9,75 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import useStyles from './styles'
+import useStyles from './styles';
+import Auth from '../../services/Auth';
+import {useNavigate} from 'react-router-dom';
 
-const theme = createTheme();
+const apiURL = "https://localhost:4000/";
 
 export default function SignIn() {
+
+  const navigate = useNavigate();
+
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [emailError, setEmailError] = React.useState("");
+  const [passwordError, setPasswordError] = React.useState("");
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  }
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  }
+  const validate = () => {
+    let emailError = "";
+    let passwordError = "";
+
+    setEmailError("");
+    setPasswordError("");
+
+    if (!email.includes('@')){
+      emailError = "Invalid Email";
+    }
+    if(!password){
+      passwordError = "Invalid Password";
+    }
+    if(emailError){
+      setEmailError(emailError);
+      return false
+    }
+    if(passwordError){
+      setPasswordError(passwordError);
+      return false
+    }
+    return true
+  };
+
   const classes = useStyles();
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    const isValid = validate();
+    if(isValid){
+      Auth.login({
+        email: email,
+        password: password
+      }).then(res => {
+        if (res.data){
+          navigate('/');
+        }
+        else{
+          setEmailError("Invalid combination of email and password");
+        }
+      })
+    }
   };
 
   return (
     <main className={classes.content}>
     <div className = {classes.toolbar}>
-    <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -47,6 +95,7 @@ export default function SignIn() {
             Sign in
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+            <div style = {{fontSize:15, color: "red"}}>{emailError}</div>
             <TextField
               margin="normal"
               required
@@ -54,14 +103,19 @@ export default function SignIn() {
               id="email"
               label="Email Address"
               name="email"
+              onChange={handleEmailChange}
+              value={email}
               autoComplete="email"
               autoFocus
             />
+            <div style = {{fontSize:15, color: "red"}}>{passwordError}</div>
             <TextField
               margin="normal"
               required
               fullWidth
               name="password"
+              value={password}
+              onChange={handlePasswordChange}
               label="Password"
               type="password"
               id="password"
@@ -85,7 +139,6 @@ export default function SignIn() {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
     </div>
     </main>
   );
