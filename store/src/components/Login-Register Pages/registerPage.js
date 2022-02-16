@@ -64,12 +64,11 @@ export default function SignUp() {
         email: email,
         password: password
       }).then(res => {
-        console.log(res);
-        if (res){
+        if (res.data){
           navigate('/');
         }
         else{
-          setEmailError("Invalid combination of email and password");
+          setEmailError("Email already in use");
         }
       })
     }

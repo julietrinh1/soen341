@@ -44,7 +44,6 @@ router.post('/userlogin', async (req, res) => {
             res.send(null);
         }
         else if(req.body.password === user.password){
-            console.log(user)
             res.send(user);
         }
         else{
@@ -55,10 +54,12 @@ router.post('/userlogin', async (req, res) => {
 
 //Handle user register
 router.post('/usersignup', async (req, res) => {
-    getUserByEmail(req.body.email).then(user => {
-        if(!user){
-            console.log("signing up");
-            userManager.createUser(user).then(user => {
+    getUserByEmail(req.body.email).then(sampleUser => {
+        if(!sampleUser){
+            userManager.createUser({
+                email:req.body.email,
+                password: req.body.password,
+            }).then(user => {
                 res.send(user);
             }).catch(e => {
                 res.status(500).send(e);

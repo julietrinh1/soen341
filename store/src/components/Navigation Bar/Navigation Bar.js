@@ -18,6 +18,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import useStyles from './styles';
 import { Link } from 'react-router-dom';
+import Auth from '../../services/Auth';
 
 const pages = [['Home', '/'], ['Products', '/Products'], ['Contact Us', '/']];
 const settings = ['Profile', 'My Cart', 'Logout'];
@@ -54,7 +55,7 @@ const Navbar = () => {
                     <ListItem component={Link} to={text[1]} button key={text[0]}>
                         <ListItemIcon>
                         </ListItemIcon>
-                        <ListItemText  primary={text[0]} />
+                        <ListItemText primary={text[0]} />
                     </ListItem>
                 ))}
             </List>
@@ -105,13 +106,13 @@ const Navbar = () => {
                                 key={page[0]}
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: 'inherit', display: 'block' }}
-                                >
+                            >
                                 {page[0]}
                             </Button>
                         ))}
                     </Box>
 
-                    <Box sx={{ flexGrow: 0 , display:'none'}} >
+                    <Box sx={{ flexGrow: 0, display: Auth.loggedIn ? 'block' : 'none' }} >
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                                 <Avatar alt="Lorem Ipsum" src="" />
@@ -130,14 +131,15 @@ const Navbar = () => {
                             ))}
                         </Menu>
                     </Box>
-                    <Box sx={{ flexGrow: 0 }} >
-                        <IconButton 
-                            component={Link} 
-                            to={"/signin"} 
-                            sx={{ my: 2, color: 'inherit', display: 'block', p: 0 }}
-                            >
-                            <Avatar alt="Lorem Ipsum" src="" />
-                        </IconButton>
+                    <Box sx={{ flexGrow: 0, display: Auth.loggedIn ? 'none' : 'block'}} >
+                        <Button
+                            component={Link}
+                            to="/signin"
+                            key="Sign In"
+                            sx={{ my: 2, color: 'primary', display: 'block', fontSize:16}}
+                        >
+                            Sign in
+                        </Button>
                     </Box>
                 </Toolbar>
             </Container>

@@ -65,7 +65,7 @@ export default function SignIn() {
         email: email,
         password: password
       }).then(res => {
-        if (res){
+        if (res.data){
           navigate('/');
         }
         else{
