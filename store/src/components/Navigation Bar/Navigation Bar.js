@@ -126,11 +126,11 @@ const Navbar = ({ setToken, userInfo, setUserInfo }) => {
                         </Button>
                         <Button name="cart"
                             component={Link}
-                            to={pages[4][0]}
+                            to={pages[3][1]}
                             onClick={handleCloseNavMenu}
                             sx={{ my: 2, color: 'inherit', display: 'block' }}
                         >
-                            {pages[4][1]}
+                            {pages[3][0]}
                         </Button>
                         <Button name="products"
                             onClick={handleOpenProductMenu}

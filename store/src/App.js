@@ -9,20 +9,34 @@ import useToken from './services/useToken';
 import useUserInfo from './services/useUserInfo';
 import { Navigate } from 'react-router-dom';
 import AddPPage from './components/Add Products/Add Products Page';
+import CartPage from './components/Cart Page/cartPage';
+import useCart from './services/useCart';
 
 function App() {
 
+  const { cart, setCart } = useCart({
+    products:[{
+      position: 1,
+      qty: 3,
+      name: "Jeans",
+      price:"40$",
+      ppu:"30$",
+      image:"https://img.abercrombie.com/is/image/anf/KIC_155-1116-2660-278_prod1?p..."
+    }]
+  });
   const { token, setToken } = useToken();
   const { userInfo, setUserInfo} = useUserInfo();
+
   return (
     <BrowserRouter>
       <div>
-        <Navbar setToken={setToken} userInfo={userInfo} setUserInfo={setUserInfo}/>
+        <Navbar setToken={setToken} userInfo={userInfo} setUserInfo={setUserInfo} setCart={setCart}/>
         <Routes>
-          <Route path="products" exact element={<Products />} />
-          <Route path="products/shoes" element={<Products Category = "Shoes" />} />
-          <Route path="products/shirts" element={<Products Category = "Shirts" />} />
-          <Route path="products/pants" element={<Products  Category = "Pants"/>} />
+          <Route path="products" exact element={<Products setCart={setCart} cart={cart} />} />
+          <Route path="products/shoes" element={<Products setCart={setCart} cart={cart} Category = "Shoes" />} />
+          <Route path="products/shirts" element={<Products setCart={setCart} cart={cart} Category = "Shirts" />} />
+          <Route path="products/pants" element={<Products  setCart={setCart} cart={cart} Category = "Pants"/>} />
+          <Route path="/CartPage" element={<CartPage cart={cart}/>} />
           <Route path="signin" element={token ? <Navigate to="/dashboard"/> : <SignIn setToken={setToken} setUserInfo={setUserInfo} userInfo={userInfo}/>} />
           <Route path="signup" element={token ? <Navigate to="/dashboard"/> : <SignUp setToken={setToken} setUserInfo={setUserInfo} />} />
           <Route path="/dashboard" element={token ? <Dashboard userInfo={userInfo} /> : <Navigate to="/signin"/>} />
