@@ -1,86 +1,69 @@
 const express = require('express');
-const { getUserByEmail } = require('./UserManager');
+const { getUserByEmail, createUser } = require('./UserManager');
 const router = express.Router();
 const userManager = require("./UserManager");
-
-//Get all users
-router.get('/', async (req, res) => {
-    try{
-        const users = await userManager.getAllUsers();
-        console.log(users);
-        res.send(users);
-        const users = await userManager.listAllUsers;
-        res.json(users);
-    }
-    catch(e){
-        res.status(500).json({message: e.message});
-    }
-})
-
-//Get one user with id "id"
-router.get('/:id', (req, res) => {
-
-})
-
-//Create user
-router.post('/', (req, res) => {
-    
-})
-
-//Check if user exists
-router.post('/usercheck', async (req, res) => {
-    getUserByEmail(req.body.email).then(user => {
-        if(!user){
-            res.send(null)
-        }
-        else{
-            res.send(user);
-        }
-    });
-})
+const jwt = require('jsonwebtoken');
 
 //Handle user sign in
 router.post('/userlogin', async (req, res) => {
-    getUserByEmail(req.body.email).then(user => {
-        if(!user){
-            res.send(null);
-        }
-        else if(req.body.password === user.password){
-            res.send(user);
-        }
-        else{
-            res.send(null);
-        }
-    });
+
+    const { email, password } = req.body;
+
+    const user = await getUserByEmail(email);
+
+    if (!user) {
+        res.status(400).send(null);
+    }
+
+    else if (user.password !== password) {
+        res.status(400).send(null);
+    }
+
+    else if (user.password === password) {
+
+        const token = jwt.sign(
+            { email: email },
+            process.env.TOKEN_KEY,
+            {
+                expiresIn: "2h",
+            }
+        );
+
+        res.status(200).send({
+            ...user,
+            token: token
+        })
+    }
 })
 
 //Handle user register
 router.post('/usersignup', async (req, res) => {
-    getUserByEmail(req.body.email).then(sampleUser => {
-        if(!sampleUser){
-            userManager.createUser({
-                email:req.body.email,
-                password: req.body.password,
-            }).then(user => {
-                res.send(user);
-            }).catch(e => {
-                res.status(500).send(e);
-            });
+
+    const { email, password, isAdmin } = req.body;
+
+    sampleUser = await getUserByEmail(email);
+
+    if (sampleUser) {
+        return res.status(400).send(null);
+    }
+
+    const token = jwt.sign(
+        { email: email },
+        process.env.TOKEN_KEY,
+        {
+            expiresIn: "2h",
         }
-        else{
-            res.send(null);
-        }
-    });
+    );
+
+    const user = await createUser({
+        email: email,
+        password: password,
+        isAdmin: isAdmin,
+        token: token
+    })
+
+    res.status(201).send(user);
 })
 
-//Update user
-router.patch('/:id', (req, res) => {
-    
-})
-
-//Delete user
-router.delete('/:id', (req, res) => {
-    
-})
 
 module.exports = router;

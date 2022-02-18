@@ -2,7 +2,9 @@ import React from 'react';
 import {Grid} from '@material-ui/core'
 import Product from './Product/Product';
 import useStyles from './styles';
-import axios from 'axios';
+
+const products = []
+
 const Products = () => {
     const classes = useStyles();
 

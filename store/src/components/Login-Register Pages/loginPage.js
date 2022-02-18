@@ -10,14 +10,15 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import useStyles from './styles';
-import Auth from '../../services/Auth';
-import {useNavigate} from 'react-router-dom';
+import axios from 'axios';
 
-const apiURL = "https://localhost:4000/";
+const apiURL = "http://localhost:4000/";
 
-export default function SignIn() {
+export default function SignIn({ setToken, setUserInfo }) {
 
-  const navigate = useNavigate();
+  async function loginUser(credentials) {
+    return await axios.post(apiURL + "users/userlogin", credentials).catch(() => { return null });
+  }
 
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -38,17 +39,17 @@ export default function SignIn() {
     setEmailError("");
     setPasswordError("");
 
-    if (!email.includes('@')){
+    if (!email.includes('@')) {
       emailError = "Invalid Email";
     }
-    if(!password){
+    if (!password) {
       passwordError = "Invalid Password";
     }
-    if(emailError){
+    if (emailError) {
       setEmailError(emailError);
       return false
     }
-    if(passwordError){
+    if (passwordError) {
       setPasswordError(passwordError);
       return false
     }
@@ -57,89 +58,89 @@ export default function SignIn() {
 
   const classes = useStyles();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const isValid = validate();
-    if(isValid){
-      Auth.login({
+    if (isValid) {
+      const res = await loginUser({
         email: email,
         password: password
-      }).then(res => {
-        if (res.data){
-          navigate('/');
-        }
-        else{
-          setEmailError("Invalid combination of email and password");
-        }
-      })
+      });
+      if (res == null) {
+        setEmailError("Invalid combination of email and password");
+      }
+      else {
+        setToken(res.data.token);
+        setUserInfo(res.data);
+      }
     }
   };
 
   return (
     <main className={classes.content}>
-    <div className = {classes.toolbar}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            <div style = {{fontSize:15, color: "red"}}>{emailError}</div>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              onChange={handleEmailChange}
-              value={email}
-              autoComplete="email"
-              autoFocus
-            />
-            <div style = {{fontSize:15, color: "red"}}>{passwordError}</div>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              value={password}
-              onChange={handlePasswordChange}
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item>
-                <Link href="/signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
+      <div className={classes.toolbar}>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <Box
+            sx={{
+              marginTop: 8,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+              <div style={{ fontSize: 15, color: "red" }}>{emailError}</div>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                onChange={handleEmailChange}
+                value={email}
+                autoComplete="email"
+                autoFocus
+              />
+              <div style={{ fontSize: 15, color: "red" }}>{passwordError}</div>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                value={password}
+                onChange={handlePasswordChange}
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Sign In
+              </Button>
+              <Grid container>
+                <Grid item>
+                  <Link href="/signup" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </Grid>
               </Grid>
-            </Grid>
+            </Box>
           </Box>
-        </Box>
-      </Container>
-    </div>
+        </Container>
+      </div>
     </main>
   );
 }
