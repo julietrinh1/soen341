@@ -25,7 +25,7 @@ const Product = ({product}) => {
 
         </CardContent>
         <CardActions disableSpacing className={classes.cardActions}>
-            <IconButton aria-label = "Add to Cart">
+            <IconButton onClick={ refreshPage } aria-label = "Add to Cart" >
                 <AddShoppingCart/>
             </IconButton>
         </CardActions>
@@ -33,5 +33,10 @@ const Product = ({product}) => {
     </Card>
   )
 }
+
+function refreshPage(){ 
+    window.location.reload(); 
+}
+
 
 export default Product
