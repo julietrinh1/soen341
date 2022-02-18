@@ -17,15 +17,21 @@ const CartPage = () => {
                     <th>#</th>
                     <th>Image</th>
                     <th>Item</th>
-                    <th>Category</th>
                     <th>Qt.</th>
                     <th>Price per unit</th>
                     <th>Price</th>
                 </tr>
+            var cartProductsArr = cartProductsToArray();
+            cartProductsArr.forEach(product => {
+                <tr>
+                        <td>product.position</td>
+                        <td>product.name</td>
+                        <td>product.qty</td>
+                        <td>product.ppu</td>
+                        <td>product.price</td>
+                </tr>
+                }
             </table>
-            foreach(){
-
-            }
         </main>
     );
 }
@@ -77,6 +83,23 @@ const CartPage = () => {
                     throw err;
                 }
             });
+        }
+    }
+
+
+    function cartProductsToArray() {
+        fs.readFile("cart.xml", "utf-8", (err, data) => {
+            if (err) {
+                throw err;
+            }
+
+            xml2js.parseString(data, (err, result) => {
+                if (err) {
+                    throw err;
+                }
+            });
+
+            return result.cart.product;
         }
     }
 
