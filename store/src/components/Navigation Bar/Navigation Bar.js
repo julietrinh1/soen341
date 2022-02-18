@@ -137,10 +137,10 @@ const Navbar = ({ setToken, userInfo, setUserInfo }) => {
                             open={Boolean(anchorElProduct)}
                             onClose={handleCloseProductMenu}
                             >
-                                    <MenuItem  component={Link} to='products'>All Products</MenuItem>
-                                    <MenuItem  component={Link} to='products/shoes'>Shoes</MenuItem>
-                                    <MenuItem  component={Link} to='products/shirts'>Shirts</MenuItem>
-                                    <MenuItem  component={Link} to='products/pants'>Pants</MenuItem>
+                                    <MenuItem  component={Link} to='products' onClick={() => window.location("products")}>All Products</MenuItem>
+                                    <MenuItem  component={Link} to='products/shoes' onClick={() => window.location("products/shoes")}>Shoes</MenuItem>
+                                    <MenuItem  component={Link} to='products/shirts' onClick={() => window.location("products/shirts")}>Shirts</MenuItem>
+                                    <MenuItem  component={Link} to='products/pants' onClick={() => window.location("products/pants")}>Pants</MenuItem>
                         </Menu>
                         <Button name="contactus"
                             component={Link}
