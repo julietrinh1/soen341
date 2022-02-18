@@ -19,7 +19,7 @@ import ListItemText from '@mui/material/ListItemText';
 import useStyles from './styles';
 import { Link, useNavigate } from 'react-router-dom';
 
-const pages = [['Home', '/'], ['Products', '/Products'], ['Contact Us', '/'], ['Cart', '/CartPage']];
+const pages = [['Home', '/'], ['Products', '/Products'], ['Contact Us', '/']];
 const productlist = ['Shoes', 'Shirts', 'Pants'];
 
 const Navbar = ({ setToken, userInfo, setUserInfo }) => {
@@ -124,14 +124,7 @@ const Navbar = ({ setToken, userInfo, setUserInfo }) => {
                         >
                             {pages[0][0]}
                         </Button>
-                        <Button name="cart"
-                            component={Link}
-                            to={pages[4][0]}
-                            onClick={handleCloseNavMenu}
-                            sx={{ my: 2, color: 'inherit', display: 'block' }}
-                        >
-                            {pages[4][1]}
-                        </Button>
+
                         <Button name="products"
                             onClick={handleOpenProductMenu}
                             sx={{ my: 2, color: 'inherit', display: 'block' }}
