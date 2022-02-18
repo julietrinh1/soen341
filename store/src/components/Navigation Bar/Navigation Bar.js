@@ -165,7 +165,7 @@ const Navbar = ({ setToken, userInfo, setUserInfo }) => {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            <MenuItem component={Link} to="/admin/add-products" sx={{display: userInfo.isAdmin ? "block" : "none"}}>
+                            <MenuItem component={Link} to="/admin/add-products" sx={{display: userInfo && userInfo.isAdmin ? "block" : "none"}}>
                                 <Typography textAlign="center">Add Products</Typography>
                             </MenuItem>
                             <MenuItem component={Link} to="/dashboard">
