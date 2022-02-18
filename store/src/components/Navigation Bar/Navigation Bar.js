@@ -19,7 +19,7 @@ import ListItemText from '@mui/material/ListItemText';
 import useStyles from './styles';
 import { Link, useNavigate } from 'react-router-dom';
 
-const pages = [['Home', '/'], ['Products', '/Products'], ['Contact Us', '/']];
+const pages = [['Home', '/Home'], ['Products', '/Products'], ['Contact Us', '/']];
 const productlist = ['Shoes', 'Shirts', 'Pants'];
 
 const Navbar = ({ setToken, userInfo, setUserInfo }) => {
