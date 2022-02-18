@@ -6,7 +6,6 @@ const jwt = require('jsonwebtoken');
 
 //Handle user sign in
 router.post('/userlogin', async (req, res) => {
-
     const { email, password } = req.body;
 
     const user = await getUserByEmail(email);

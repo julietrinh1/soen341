@@ -136,12 +136,11 @@ const Navbar = ({ setToken, userInfo, setUserInfo }) => {
                             keepMounted
                             open={Boolean(anchorElProduct)}
                             onClose={handleCloseProductMenu}
-                        >
-                            {productlist.map((products) => (
-                                <MenuItem key={products} onClick={handleCloseProductMenu}>
-                                    <Typography textAlign="center">{products}</Typography>
-                                </MenuItem>
-                            ))}
+                            >
+                                    <MenuItem  component={Link} to='products'>All Products</MenuItem>
+                                    <MenuItem  component={Link} to='products/shoes'>Shoes</MenuItem>
+                                    <MenuItem  component={Link} to='products/shirts'>Shirts</MenuItem>
+                                    <MenuItem  component={Link} to='products/pants'>Pants</MenuItem>
                         </Menu>
                         <Button name="contactus"
                             component={Link}
