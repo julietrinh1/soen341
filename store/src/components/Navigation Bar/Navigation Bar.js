@@ -17,14 +17,15 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import useStyles from './styles';
-import { Link } from 'react-router-dom';
-import Auth from '../../services/Auth';
+import { Link, useNavigate } from 'react-router-dom';
 
 const pages = [['Home', '/'], ['Products', '/Products'], ['Contact Us', '/']];
-const settings = ['Profile', 'My Cart', 'Logout'];
 const productlist = ['Shoes', 'Shirts', 'Pants'];
 
-const Navbar = () => {
+const Navbar = ({ setToken, userInfo, setUserInfo }) => {
+
+    const navigate = useNavigate();
+
     useStyles();
 
     const [state, setState] = React.useState(false);
@@ -52,6 +53,13 @@ const Navbar = () => {
 
     const handleCloseProductMenu = () => {
         setAnchorElProduct(null);
+    };
+
+    const handleLogout = () => {
+        setAnchorElUser(null);
+        setToken("");
+        setUserInfo("");
+        navigate('/signin');
     };
 
     const Sidebar = () => (
@@ -108,24 +116,22 @@ const Navbar = () => {
                         LOGO
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                            <Button name = "home"
-                                component={Link}
-                                to={pages[0][1]}
-                                key={pages[0][1]}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'inherit', display: 'block' }}
-                                >
-                                {pages[0][0]}
-                            </Button>
+                        <Button name="home"
+                            component={Link}
+                            to={pages[0][1]}
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'inherit', display: 'block' }}
+                        >
+                            {pages[0][0]}
+                        </Button>
 
-                            <Button name = "products"
-                                key={pages[0][1]}
-                                onClick={handleOpenProductMenu}
-                                sx={{ my: 2, color: 'inherit', display: 'block' }}
-                                >
-                                {pages[1][0]}
-                            </Button>
-                            <Menu
+                        <Button name="products"
+                            onClick={handleOpenProductMenu}
+                            sx={{ my: 2, color: 'inherit', display: 'block' }}
+                        >
+                            {pages[1][0]}
+                        </Button>
+                        <Menu
                             anchorEl={anchorElProduct}
                             keepMounted
                             open={Boolean(anchorElProduct)}
@@ -136,18 +142,18 @@ const Navbar = () => {
                                     <MenuItem  component={Link} to='products/shirts'>Shirts</MenuItem>
                                     <MenuItem  component={Link} to='products/pants'>Pants</MenuItem>
                         </Menu>
-                            <Button name = "contactus"
-                                component={Link}
-                                to={pages[2][1]}
-                                key={pages[2][0]}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'inherit', display: 'none' }}
-                               >
-                                {pages[2][0]}
-                            </Button>
+                        <Button name="contactus"
+                            component={Link}
+                            to={pages[2][1]}
+                            key={pages[2][0]}
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'inherit', display: 'none' }}
+                        >
+                            {pages[2][0]}
+                        </Button>
                     </Box>
 
-                    <Box sx={{ flexGrow: 0, display: Auth.loggedIn ? 'block' : 'none' }} >
+                    <Box sx={{ flexGrow: 0, display: userInfo ? 'block' : 'none' }} >
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                                 <Avatar alt="Lorem Ipsum" src="" />
@@ -159,19 +165,26 @@ const Navbar = () => {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
-                                </MenuItem>
-                            ))}
+                            <MenuItem component={Link} to="/admin/add-products" sx={{display: userInfo.isAdmin ? "block" : "none"}}>
+                                <Typography textAlign="center">Add Products</Typography>
+                            </MenuItem>
+                            <MenuItem component={Link} to="/dashboard">
+                                <Typography textAlign="center">My Profile</Typography>
+                            </MenuItem>
+                            <MenuItem onClick={handleCloseUserMenu}>
+                                <Typography textAlign="center">My Cart</Typography>
+                            </MenuItem>
+                            <MenuItem onClick={handleLogout}>
+                                <Typography textAlign="center">Logout</Typography>
+                            </MenuItem>
                         </Menu>
                     </Box>
-                    <Box sx={{ flexGrow: 0, display: Auth.loggedIn ? 'none' : 'block'}} >
+                    <Box sx={{ flexGrow: 0, display: userInfo ? 'none' : 'block' }} >
                         <Button
                             component={Link}
                             to="/signin"
                             key="Sign In"
-                            sx={{ my: 2, color: 'primary', display: 'block', fontSize:16}}
+                            sx={{ my: 2, color: 'primary', display: 'block', fontSize: 16 }}
                         >
                             Sign in
                         </Button>
