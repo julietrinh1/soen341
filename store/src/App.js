@@ -4,11 +4,13 @@ import SignIn from './components/Login-Register Pages/loginPage';
 import SignUp from './components/Login-Register Pages/registerPage';
 import Navbar from './components/Navigation Bar/Navigation Bar';
 import Products from './components/Products/Products';
+import Home from './components/Home/Home';
 import Dashboard from './components/Dashboard/Dashboard';
 import useToken from './services/useToken';
 import useUserInfo from './services/useUserInfo';
 import { Navigate } from 'react-router-dom';
 import AddPPage from './components/Add Products/Add Products Page';
+import { Redirect } from 'react-router';
 
 function App() {
 
@@ -19,6 +21,9 @@ function App() {
       <div>
         <Navbar setToken={setToken} userInfo={userInfo} setUserInfo={setUserInfo}/>
         <Routes>
+          
+        <Route path="" exact element={<Home />} />
+        <Route path="/Home" exact element={<Home />} />
           <Route path="products" exact element={<Products />} />
           <Route path="products/shoes" element={<Products Category = "Shoes" />} />
           <Route path="products/shirts" element={<Products Category = "Shirts" />} />
