@@ -20,9 +20,9 @@ function App() {
         <Navbar setToken={setToken} userInfo={userInfo} setUserInfo={setUserInfo}/>
         <Routes>
           <Route path="products" exact element={<Products />} />
-          <Route path="products/shoes" element={<Products category = "shoes" />} />
-          <Route path="products/shirts" element={<Products category = "shirts" />} />
-          <Route path="products/pants" element={<Products  category = "pants"/>} />
+          <Route path="products/shoes" element={<Products Category = "Shoes" />} />
+          <Route path="products/shirts" element={<Products Category = "Shirts" />} />
+          <Route path="products/pants" element={<Products  Category = "Pants"/>} />
           <Route path="signin" element={token ? <Navigate to="/dashboard"/> : <SignIn setToken={setToken} setUserInfo={setUserInfo} userInfo={userInfo}/>} />
           <Route path="signup" element={token ? <Navigate to="/dashboard"/> : <SignUp setToken={setToken} setUserInfo={setUserInfo} />} />
           <Route path="/dashboard" element={token ? <Dashboard userInfo={userInfo} /> : <Navigate to="/signin"/>} />
