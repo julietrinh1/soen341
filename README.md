@@ -25,4 +25,4 @@ Front-End: React.js
 
 Back-End: Node.js
 
-Database: MySQL
+Database: MQL with MongoDB
