@@ -1,0 +1,22 @@
+{
+  "name": "soen341",
+  "version": "1.0.0",
+  "description": "Develop an e-commerce website.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test.js --reporter list"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/julietrinh1/soen341.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/julietrinh1/soen341/issues"
+  },
+  "homepage": "https://github.com/julietrinh1/soen341#readme",
+  "dependencies": {
+    "mocha": "^9.2.2"
+  }
+}
