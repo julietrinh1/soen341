@@ -33,7 +33,7 @@
   "scripts": {
     "start": "react-scripts start --watch --watch-poll",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "mocha --recursive --reporter mocha-junit-reporter --timeout 60000 --exit",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
