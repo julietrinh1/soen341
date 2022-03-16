@@ -16,24 +16,20 @@
     "bootstrap": "^5.1.3",
     "history": "^5.2.0",
     "material-ui-icons": "^1.0.0-beta.36",
-    "node-sass": "^7.0.1",
     "npm-check-updates": "^12.3.0",
     "react": "^17.0.2",
     "react-bootstrap": "^2.1.2",
     "react-dom": "^17.0.2",
     "react-hook-form": "^6.11.5",
-    "react-icons": "^4.3.1",
     "react-router": "^5.2.0",
     "react-router-dom": "^6.0.0-beta.8",
     "react-scripts": "5.0.0",
-    "styled-components": "^5.3.3",
-    "web-vitals": "^2.1.4",
-    "xml2js": "^0.4.23"
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start --watch --watch-poll",
     "build": "react-scripts build",
-    "test": "mocha --recursive --reporter mocha-junit-reporter --timeout 60000 --exit",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
