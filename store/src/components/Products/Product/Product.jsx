@@ -34,4 +34,9 @@ const classes = useStyles();
   )
 }
 
+function refreshPage(){ 
+    window.location.reload(); 
+}
+
+
 export default Product

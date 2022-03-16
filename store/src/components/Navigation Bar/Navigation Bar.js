@@ -19,8 +19,15 @@ import ListItemText from '@mui/material/ListItemText';
 import useStyles from './styles';
 import { Link, useNavigate } from 'react-router-dom';
 
+<<<<<<< HEAD
 const pages = [['Home', '/'], ['Products', '/Products'], ['Contact Us', '/'], ['Cart', '/Cart']];
 const Navbar = ({ setToken, userInfo, setUserInfo, setCart }) => {
+=======
+const pages = [['Home', '/Home'], ['Products', '/Products'], ['Contact Us', '/']];
+const productlist = ['Shoes', 'Shirts', 'Pants'];
+
+const Navbar = ({ setToken, userInfo, setUserInfo }) => {
+>>>>>>> main
 
     const navigate = useNavigate();
 
@@ -123,6 +130,7 @@ const Navbar = ({ setToken, userInfo, setUserInfo, setCart }) => {
                         >
                             {pages[0][0]}
                         </Button>
+<<<<<<< HEAD
                         <Button name="cart"
                             component={Link}
                             to={pages[3][1]}
@@ -131,6 +139,9 @@ const Navbar = ({ setToken, userInfo, setUserInfo, setCart }) => {
                         >
                             {pages[3][0]}
                         </Button>
+=======
+
+>>>>>>> main
                         <Button name="products"
                             onClick={handleOpenProductMenu}
                             sx={{ my: 2, color: 'inherit', display: 'block' }}
