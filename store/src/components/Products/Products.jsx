@@ -4,18 +4,17 @@ import Product from './Product/Product';
 import useStyles from './styles';
 import axios from "axios"
 
-const Products = ({Category}) => {
+const Products = ({Category, onUpdateCartQty}) => {
 const [products,setProducts] = useState([]);
 
     const GetAllProducts = async () => {
-        if(Category == "Shoes"){
-            console.log([])
+        if(Category === "Shoes"){
             return axios.get("http://localhost:4000/products/shoes").catch(()=> {return null});
         }
-        if(Category == "Shirts"){
+        if(Category === "Shirts"){
             return axios.get("http://localhost:4000/products/shirts").catch(()=> {return null});
         }
-        if(Category == "Pants"){
+        if(Category === "Pants"){
             return axios.get("http://localhost:4000/products/pants").catch(()=> {return null});
         }
         else{
@@ -25,10 +24,7 @@ const [products,setProducts] = useState([]);
 
     const classes = useStyles();
     useEffect( async () => {
-        console.log(Category)
-        setProducts([]);
         const clothing = await GetAllProducts()
-        console.log(clothing.data)
         setProducts(clothing.data)
      },[]);
 
@@ -39,7 +35,7 @@ const [products,setProducts] = useState([]);
         <Grid container justifyContent="center" spacing ={4}>
             {products.map((product, key) => (
                 <Grid key = {key} item xs={12} sm={6} md={4} lg={3}>
-                    <Product product = {product}/>
+                    <Product onUpdateCartQty={onUpdateCartQty} product = {product}/>
                 </Grid>
             ))}
         </Grid>

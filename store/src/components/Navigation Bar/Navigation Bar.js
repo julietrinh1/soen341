@@ -19,10 +19,8 @@ import ListItemText from '@mui/material/ListItemText';
 import useStyles from './styles';
 import { Link, useNavigate } from 'react-router-dom';
 
-const pages = [['Home', '/'], ['Products', '/Products'], ['Contact Us', '/'], ['Cart', '/CartPage']];
-const productlist = ['Shoes', 'Shirts', 'Pants'];
-
-const Navbar = ({ setToken, userInfo, setUserInfo }) => {
+const pages = [['Home', '/'], ['Products', '/Products'], ['Contact Us', '/'], ['Cart', '/Cart']];
+const Navbar = ({ setToken, userInfo, setUserInfo, setCart }) => {
 
     const navigate = useNavigate();
 
@@ -57,6 +55,7 @@ const Navbar = ({ setToken, userInfo, setUserInfo }) => {
 
     const handleLogout = () => {
         setAnchorElUser(null);
+        setCart("");
         setToken("");
         setUserInfo("");
         navigate('/signin');
@@ -144,10 +143,22 @@ const Navbar = ({ setToken, userInfo, setUserInfo }) => {
                             open={Boolean(anchorElProduct)}
                             onClose={handleCloseProductMenu}
                             >
-                                    <MenuItem  component={Link} to='products'>All Products</MenuItem>
-                                    <MenuItem  component={Link} to='products/shoes'>Shoes</MenuItem>
-                                    <MenuItem  component={Link} to='products/shirts'>Shirts</MenuItem>
-                                    <MenuItem  component={Link} to='products/pants'>Pants</MenuItem>
+                                    <MenuItem  component={Link} to='products' onClick={() => {
+                                        window.location("products");
+                                        }
+                                    }>All Products</MenuItem>
+                                    <MenuItem  component={Link} to='products/shoes' onClick={() => {
+                                        window.location("products/shoes");
+                                        }
+                                    }>Shoes</MenuItem>
+                                    <MenuItem  component={Link} to='products/shirts' onClick={() => {
+                                        window.location("products/shirts");
+                                        }
+                                    }>Shirts</MenuItem>
+                                    <MenuItem  component={Link} to='products/pants' onClick={() => {
+                                        window.location("products/pants");
+                                        }
+                                    }>Pants</MenuItem>
                         </Menu>
                         <Button name="contactus"
                             component={Link}
@@ -172,13 +183,13 @@ const Navbar = ({ setToken, userInfo, setUserInfo }) => {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            <MenuItem component={Link} to="/admin/add-products" sx={{display: userInfo && userInfo.isAdmin ? "block" : "none"}}>
+                            <MenuItem onClick={handleCloseUserMenu} component={Link} to="/admin/add-products" sx={{display: userInfo && userInfo.isAdmin ? "block" : "none"}}>
                                 <Typography textAlign="center">Add Products</Typography>
                             </MenuItem>
-                            <MenuItem component={Link} to="/dashboard">
+                            <MenuItem onClick={handleCloseUserMenu} component={Link} to="/dashboard">
                                 <Typography textAlign="center">My Profile</Typography>
                             </MenuItem>
-                            <MenuItem onClick={handleCloseUserMenu}>
+                            <MenuItem onClick={handleCloseUserMenu} component={Link} to="/Cart">
                                 <Typography textAlign="center">My Cart</Typography>
                             </MenuItem>
                             <MenuItem onClick={handleLogout}>
