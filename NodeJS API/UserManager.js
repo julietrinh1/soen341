@@ -1,6 +1,4 @@
 require('dotenv').config();
-const express = require('express');
-const app = express();
 const { MongoClient } = require('mongodb');
 const client = new MongoClient("mongodb+srv://M_Afandi:Syna2462@soen341.vaay8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 

@@ -1,7 +1,6 @@
 const express = require('express');
 const { getUserByEmail, createUser } = require('./UserManager');
 const router = express.Router();
-const userManager = require("./UserManager");
 const jwt = require('jsonwebtoken');
 
 //Handle user sign in
