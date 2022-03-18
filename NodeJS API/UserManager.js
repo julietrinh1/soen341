@@ -9,7 +9,7 @@ exports.getAllUsers = async function getAllUsers(){
 
 exports.getUserByEmail = async function getUserByEmail(email){
     await client.connect();
-    return await client.db("UserDB").collection("Users").findOne({email:email});
+    return client.db("UserDB").collection("Users").findOne({email:email});
 }
 
 exports.createUser = async function createUser(user){

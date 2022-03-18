@@ -23,3 +23,12 @@ exports.getAllShoes = async function getAllShoes(){
     await client.connect();
     return client.db("Products").collection("clothing").find({Category: "Shoes"}).toArray();
 }
+exports.getProductByName = async function getProductByName (Name){
+    await client.connect();
+    return client.db("Products").collection("clothing").findOne({Name:Name});
+}
+exports.createProduct = async function createProduct(product){
+    await client.connect();
+    await client.db("Products").collection("clothing").insertOne(product);
+    return product;
+}
