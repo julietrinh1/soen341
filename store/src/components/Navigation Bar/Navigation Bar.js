@@ -192,6 +192,9 @@ const Navbar = ({ setToken, userInfo, setUserInfo, setCart }) => {
                             <MenuItem onClick={handleCloseUserMenu} component={Link} to="/Cart">
                                 <Typography textAlign="center">My Cart</Typography>
                             </MenuItem>
+                            <MenuItem onClick={handleCloseUserMenu} component={Link} to="/orders">
+                                <Typography textAlign="center">My Orders</Typography>
+                            </MenuItem>
                             <MenuItem onClick={handleLogout}>
                                 <Typography textAlign="center">Logout</Typography>
                             </MenuItem>

@@ -11,6 +11,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import useStyles from './styles';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+
 
 const apiURL = "http://localhost:4000/";
 
@@ -19,6 +21,8 @@ export default function SignIn({ setToken, setUserInfo }) {
   async function loginUser(credentials) {
     return await axios.post(apiURL + "users/userlogin", credentials).catch(() => { return null });
   }
+
+  var navigate = useNavigate();
 
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -72,6 +76,7 @@ export default function SignIn({ setToken, setUserInfo }) {
       else {
         setToken(res.data.token);
         setUserInfo(res.data);
+        navigate(-1);
       }
     }
   };

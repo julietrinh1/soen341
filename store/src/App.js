@@ -12,12 +12,16 @@ import { Navigate } from 'react-router-dom';
 import AddPPage from './components/Add Products/Add Products Page';
 import Cart from './components/Cart Page/Cart';
 import useCart from './services/useCart';
+import Checkout from './components/Checkout/Checkout'
+import Orders from './components/Orders';
+
 
 function App() {
 
   const { cart, setCart, onUpdateCartQty, onRemoveFromCart, emptyCart } = useCart();
   const { token, setToken } = useToken();
   const { userInfo, setUserInfo} = useUserInfo();
+
   return (
     <BrowserRouter>
       <div>
@@ -30,8 +34,10 @@ function App() {
           <Route path="products/shirts" element={<Products setCart={setCart} onUpdateCartQty={onUpdateCartQty} cart={cart} onRemoveFromCart={onRemoveFromCart} Category = "Shirts" />} />
           <Route path="products/pants" element={<Products  setCart={setCart} onUpdateCartQty={onUpdateCartQty} cart={cart} onRemoveFromCart={onRemoveFromCart} Category = "Pants"/>} />
           <Route path="/cart" element={<Cart cart={cart} onUpdateCartQty={onUpdateCartQty} onRemoveFromCart={onRemoveFromCart} emptyCart={emptyCart}/>} />
-          <Route path="signin" element={token ? <Navigate to="/dashboard"/> : <SignIn setToken={setToken} setUserInfo={setUserInfo} userInfo={userInfo}/>} />
-          <Route path="signup" element={token ? <Navigate to="/dashboard"/> : <SignUp setToken={setToken} setUserInfo={setUserInfo} />} />
+          <Route path="/checkout" element={token && userInfo ? <Checkout cart={cart} emptyCart={emptyCart}/> : <Navigate to="/signin"/>} />
+          <Route path="signin" element={token && userInfo ? <Navigate to="/dashboard"/> : <SignIn setToken={setToken} setUserInfo={setUserInfo} userInfo={userInfo}/>} />
+          <Route path="orders" element={token && userInfo ? <Orders userInfo={userInfo} /> : <Navigate to="/signin"/>} />
+          <Route path="signup" element={token && userInfo ? <Navigate to="/dashboard"/> : <SignUp setToken={setToken} setUserInfo={setUserInfo} />} />
           <Route path="/dashboard" element={token ? <Dashboard userInfo={userInfo} /> : <Navigate to="/signin"/>} />
           <Route path="/admin/add-products" element={token && userInfo  && userInfo.isAdmin ? <AddPPage userInfo={userInfo} /> : <Navigate to="/dashboard"/>} />
         </Routes>
