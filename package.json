@@ -4,7 +4,7 @@
   "description": "Develop an e-commerce website.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test.js --reporter list"
+    "test": "mocha 'tests/**/*.js' --reporter list"
   },
   "repository": {
     "type": "git",

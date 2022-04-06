@@ -13,7 +13,7 @@ exports.viewUserOrders = async function viewUserOrders(user){
     return client.db("Orders").collection("Orders").find({email: user.email}).toArray();
 }
 
-exports.deleteOrder = async function deleteOrder(id){
+exports.cancelOrder = async function cancelOrder(id){
     await client.connect();
-    return client.db("Orders").collection("Orders").deleteOne({"_id": ObjectId(id)});
+    return client.db("Orders").collection("Orders").updateOne({"_id": ObjectId(id)}, { $set: {status: "Cancelled"}});
 }

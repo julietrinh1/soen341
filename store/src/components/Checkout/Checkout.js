@@ -1,6 +1,5 @@
 import React from 'react';
-import { CssBaseline, Paper, Typography, Divider, Button } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { CssBaseline, Paper, Typography } from '@material-ui/core';
 
 import CheckoutForm from './CheckoutForm.js';
 import useStyles from './styles';
@@ -8,18 +7,6 @@ import useStyles from './styles';
 const Checkout = ({ cart, emptyCart }) => {
 
   const classes = useStyles();
-
-  let Confirmation = () => (
-    <>
-      <div>
-        <Typography variant="h5">Thank you for your purchase!</Typography>
-        <Divider className={classes.divider} />
-        <Typography variant="subtitle2">Order ref</Typography>
-      </div>
-      <br />
-      <Button component={Link} variant="outlined" type="button" to="/">Back to home</Button>
-    </>
-  );
 
   const Form = () => (<CheckoutForm cart={cart} emptyCart={emptyCart}/>);
 
@@ -30,7 +17,7 @@ const Checkout = ({ cart, emptyCart }) => {
       <main className={classes.layout}>
         <Paper className={classes.paper}>
           <Typography variant="h4" align="center">Checkout</Typography>
-          <Form />
+          <Form data-testid="formForCheckout"/>
         </Paper>
       </main>
     </>
