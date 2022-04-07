@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import CheckoutForm from './CheckoutForm.js';
 import useStyles from './styles';
 
-const Checkout = ({ cart, emptyCart }) => {
+const Checkout = ({ cart, emptyCart, userInfo }) => {
 
   const classes = useStyles();
 
@@ -21,7 +21,7 @@ const Checkout = ({ cart, emptyCart }) => {
     </>
   );
 
-  const Form = () => (<CheckoutForm cart={cart} emptyCart={emptyCart}/>);
+  const Form = () => (<CheckoutForm cart={cart} emptyCart={emptyCart} userInfo={userInfo}/>);
 
   return (
     <>

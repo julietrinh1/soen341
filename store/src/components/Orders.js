@@ -26,12 +26,11 @@ export default function Orders({ userInfo }) {
     const [rerender, setRerender] = React.useState(false);
 
     const allOrders = async () => {
-        return await axios.get(apiURL + "orders/allorders", userInfo);
+        return await axios.post(apiURL + "orders/allorders", userInfo);
     }
     
     const handleCancelOrder = async (id) => {
-        console.log(id);
-        await axios.delete(apiURL + "orders/deleteorder", {data: {id: id}}).then(() => {
+        await axios.put(apiURL + "orders/cancelorder", {id:id}).then(() => {
             setRerender(!rerender);
         });
     }
@@ -45,7 +44,7 @@ export default function Orders({ userInfo }) {
 
     const classes = useStyles();
     return (
-        <main className={classes.content}>
+        <main className={classes.content} data-testid="orderPageTestId">
             <div className={classes.toolbar}></div>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -55,6 +54,7 @@ export default function Orders({ userInfo }) {
                             <TableCell align="right">Address</TableCell>
                             <TableCell align="right">City</TableCell>
                             <TableCell align="right">ZIP / Postal Code</TableCell>
+                            <TableCell align="right">Status</TableCell>
                             <TableCell align="right">Order ID</TableCell>
                             <TableCell align="right"></TableCell>
                         </TableRow>
@@ -71,11 +71,13 @@ export default function Orders({ userInfo }) {
                                 <TableCell align="right">{row.address}</TableCell>
                                 <TableCell align="right">{row.city}</TableCell>
                                 <TableCell align="right">{row.zip}</TableCell>
+                                <TableCell align="right">{row.status}</TableCell>
                                 <TableCell align="right">{row._id}</TableCell>
                                 <TableCell align="right">
                                     <IconButton
                                         onClick={()=>handleCancelOrder(row._id)}
                                         color="inherit"
+                                        disabled={row.status=="Shipping" ? false : true}
                                     >
                                         <DeleteIcon />
                                     </IconButton>
@@ -88,3 +90,4 @@ export default function Orders({ userInfo }) {
         </main>
     );
 }
+
