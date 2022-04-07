@@ -4,7 +4,7 @@
   "description": "Develop an e-commerce website.",
   "main": "index.js",
   "scripts": {
-    "test": "react-scripts test /store/src/tests/*.js"
+    "test": "react-scripts test 'store/src/tests/**/*.js"
   },
   "repository": {
     "type": "git",
@@ -20,7 +20,6 @@
     "final-form": "^4.20.6",
     "mocha": "^9.2.2",
     "react-final-form": "^6.5.8",
-    "react-scripts": "^5.0.0",
     "stripe": "^8.209.0"
   }
 }
