@@ -69,7 +69,8 @@ const CheckoutForm = ({ cart, emptyCart }) => {
             cardNumber: cardNumber,
             expiryDate: expiryDate,
             CVV: CVV,
-            products: cart.products
+            products: cart.products,
+            status: "Shipping"
         })
         if (res == null) {
             setError("Could not place order, please try again later");

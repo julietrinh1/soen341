@@ -1,5 +1,5 @@
 const express = require('express');
-const { viewUserOrders, createOrder, deleteOrder } = require('./OrderManager');
+const { viewUserOrders, createOrder, cancelOrder } = require('./OrderManager');
 const router = express.Router();
 
 
@@ -27,8 +27,8 @@ router.get('/allorders', async (req, res) => {
     else res.status(200).send(orders);
 })
 
-router.delete('/deleteorder', async (req, res) => {
-    deleteOrder(req.body.id).then(() => {
+router.put('/cancelorder', async (req, res) => {
+    cancelOrder(req.body.id).then(() => {
         res.status(200).send(null)
     })
 })
