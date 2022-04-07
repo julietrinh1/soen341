@@ -30,3 +30,4 @@ jobs:
     - run: npm run build --if-present
     - run: cd store
     - run: npm test
+    - run: cd ..
