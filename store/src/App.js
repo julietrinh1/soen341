@@ -34,7 +34,7 @@ function App() {
           <Route path="products/shirts" element={<Products setCart={setCart} onUpdateCartQty={onUpdateCartQty} cart={cart} onRemoveFromCart={onRemoveFromCart} Category = "Shirts" />} />
           <Route path="products/pants" element={<Products  setCart={setCart} onUpdateCartQty={onUpdateCartQty} cart={cart} onRemoveFromCart={onRemoveFromCart} Category = "Pants"/>} />
           <Route path="/cart" element={<Cart cart={cart} onUpdateCartQty={onUpdateCartQty} onRemoveFromCart={onRemoveFromCart} emptyCart={emptyCart}/>} />
-          <Route path="/checkout" element={token && userInfo ? <Checkout cart={cart} emptyCart={emptyCart}/> : <Navigate to="/signin"/>} />
+          <Route path="/checkout" element={token && userInfo ? <Checkout cart={cart} emptyCart={emptyCart} userInfo={userInfo}/> : <Navigate to="/signin"/>} />
           <Route path="signin" element={token && userInfo ? <Navigate to="/dashboard"/> : <SignIn setToken={setToken} setUserInfo={setUserInfo} userInfo={userInfo}/>} />
           <Route path="orders" element={token && userInfo ? <Orders userInfo={userInfo} /> : <Navigate to="/signin"/>} />
           <Route path="signup" element={token && userInfo ? <Navigate to="/dashboard"/> : <SignUp setToken={setToken} setUserInfo={setUserInfo} />} />

@@ -4,7 +4,7 @@ import { CssBaseline, Paper, Typography } from '@material-ui/core';
 import CheckoutForm from './CheckoutForm.js';
 import useStyles from './styles';
 
-const Checkout = ({ cart, emptyCart }) => {
+const Checkout = ({ cart, emptyCart, userInfo }) => {
 
   const classes = useStyles();
 

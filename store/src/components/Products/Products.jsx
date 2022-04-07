@@ -3,9 +3,11 @@ import {Grid} from '@material-ui/core'
 import Product from './Product/Product';
 import useStyles from './styles';
 import axios from "axios"
+import SearchBar from '../Search Bar/Search Bar';
 
 const Products = ({Category, onUpdateCartQty}) => {
 const [products,setProducts] = useState([]);
+const [pristineProducts,setPristineProducts] = useState([]);
 
     const GetAllProducts = async () => {
         if(Category === "Shoes"){
@@ -21,16 +23,17 @@ const [products,setProducts] = useState([]);
         return axios.get("http://localhost:4000/products/allproducts").catch(()=> {return null});
         }
     }
-
     const classes = useStyles();
     useEffect( async () => {
         const clothing = await GetAllProducts()
-        setProducts(clothing.data)
+        setProducts(clothing.data);
+        setPristineProducts(clothing.data);
      },[]);
 
 
     return(
-    <main className={classes.content}>
+    <main data-testid="productPageTestId" className={classes.content}>
+        <SearchBar placeholder="Enter a Product Name..." setData={setProducts} pristineData={pristineProducts} />
         <div className={classes.toolbar}/>
         <Grid container justifyContent="center" spacing ={4}>
             {products.map((product, key) => (

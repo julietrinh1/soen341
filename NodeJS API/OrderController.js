@@ -15,7 +15,7 @@ router.post('/createorder', async (req, res) => {
     else res.status(201).send(order);
 })
 
-router.get('/allorders', async (req, res) => {
+router.post('/allorders', async (req, res) => {
     const user = req.body;
 
     const orders = await viewUserOrders(user);
