@@ -26,7 +26,7 @@ export default function Orders({ userInfo }) {
     const [rerender, setRerender] = React.useState(false);
 
     const allOrders = async () => {
-        return await axios.get(apiURL + "orders/allorders", userInfo);
+        return await axios.post(apiURL + "orders/allorders", userInfo);
     }
     
     const handleCancelOrder = async (id) => {

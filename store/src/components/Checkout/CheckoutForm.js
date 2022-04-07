@@ -12,7 +12,7 @@ import Box from '@mui/material/Box';
 
 const apiURL = "http://localhost:4000/";
 
-const CheckoutForm = ({ cart, emptyCart }) => {
+const CheckoutForm = ({ cart, emptyCart, userInfo }) => {
 
     var navigate = useNavigate();
 
@@ -64,6 +64,7 @@ const CheckoutForm = ({ cart, emptyCart }) => {
         const res = await createOrder({
             address: address,
             name: name,
+            email: userInfo.email,
             city: city,
             zip: zip,
             cardNumber: cardNumber,
