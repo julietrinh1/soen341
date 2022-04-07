@@ -30,7 +30,7 @@
   "scripts": {
     "start": "react-scripts start --watch --watch-poll",
     "build": "react-scripts build",
-    "test": "react-scripts test src/tests/*.js",
+    "test": "react-scripts test src/tests/*.js --watch",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
