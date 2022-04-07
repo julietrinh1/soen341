@@ -4,7 +4,7 @@
   "description": "Develop an e-commerce website.",
   "main": "index.js",
   "scripts": {
-    "test": "react-scripts test 'store/src/tests/**/*.js"
+    "test": "react-scripts test store/src/tests/**/*.js"
   },
   "repository": {
     "type": "git",
