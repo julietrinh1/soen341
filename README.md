@@ -26,3 +26,7 @@ Front-End: React.js
 Back-End: Node.js
 
 Database: MQL with MongoDB
+
+## Coding Style
+
+We followed the generally accepted JavaScript coding convention, the details of which can be found here: https://www.crockford.com/code.html
