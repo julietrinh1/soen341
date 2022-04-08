@@ -4,7 +4,6 @@ import { FormProvider } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { TextField } from '@material-ui/core';
-import FormInput from './CustomTextField';
 import { useState } from 'react';
 import Review from './Review';
 import { Divider } from '@material-ui/core';
@@ -90,7 +89,7 @@ const CheckoutForm = ({ cart, emptyCart, userInfo }) => {
 
     return (
         <>
-            <Box sx={{ display: pay ? 'none' : 'block' }}>
+            <Box sx={{ display: pay ? 'none' : 'block' }} data-testid="formForCheckout">
                 <Typography variant="h6" gutterBottom>Shipping address</Typography>
                 <FormProvider>
                     <form onSubmit={handleShippingValidation}>

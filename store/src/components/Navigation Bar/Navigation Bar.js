@@ -67,7 +67,7 @@ const Navbar = ({ setToken, userInfo, setUserInfo, setCart }) => {
             onClick={handleCloseNavMenu}
         >
             <List>
-                {pages.map((text, index) => (
+                {pages.map((text) => (
                     <ListItem component={Link} to={text[1]} button key={text[0]}>
                         <ListItemIcon>
                         </ListItemIcon>
@@ -88,7 +88,7 @@ const Navbar = ({ setToken, userInfo, setUserInfo, setCart }) => {
                         component="div"
                         sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
                     >
-                        LOGO
+                        Clothes N Stuff
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -182,6 +182,7 @@ const Navbar = ({ setToken, userInfo, setUserInfo, setCart }) => {
                             keepMounted
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
+                            data-testid="navigationUserMenu"
                         >
                             <MenuItem onClick={handleCloseUserMenu} component={Link} to="/admin/add-products" sx={{display: userInfo && userInfo.isAdmin ? "block" : "none"}}>
                                 <Typography textAlign="center">Add Products</Typography>

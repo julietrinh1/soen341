@@ -9,7 +9,7 @@ const Dashboard = ({ userInfo }) => {
         <div className={classes.toolbar}/>
         <h1>This is your dashboard.</h1>
         <br/>
-        <h2>Welcome, {userInfo.email}</h2>
+        <h2>Welcome, {userInfo ? userInfo.email : "User"}</h2>
     </main>
     );
 }
