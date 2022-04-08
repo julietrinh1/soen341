@@ -36,11 +36,11 @@ const [pristineProducts,setPristineProducts] = useState([]);
         <SearchBar placeholder="Enter a Product Name..." setData={setProducts} pristineData={pristineProducts} />
         <div className={classes.toolbar}/>
         <Grid container justifyContent="center" spacing ={4}>
-            {products.map((product, key) => (
+            {products ? products.map((product, key) => (
                 <Grid key = {key} item xs={12} sm={6} md={4} lg={3}>
                     <Product onUpdateCartQty={onUpdateCartQty} product = {product}/>
                 </Grid>
-            ))}
+            )) : "No products"}
         </Grid>
     </main>
     );
