@@ -11,7 +11,15 @@ import Products from '../components/Products/Products';
 import Product from '../components/Products/Product/Product';
 import Orders from '../components/Orders';
 
-jest.mock('axios')
+jest.mock('axios', () => {
+    return {
+        getItem: async (...args) => args,
+        setItem: async (...args) => args,
+        removeItem: async (...args) => args,
+    }
+})
+
+jest.mock('axios', () => ({ get: jest.fn(),post: jest.fn(), create: jest.fn() }));
 
 it('renders home page', () => {
     const { getByText } = render(<Home />);
