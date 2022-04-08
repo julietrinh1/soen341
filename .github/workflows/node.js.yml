@@ -29,7 +29,5 @@ jobs:
         cache-dependency-path: ./store/package-lock.json
     - run: npm ci
       working-directory: store
-    - run: npm run build --if-present
-      working-directory: store
     - run: npm test
       working-directory: store
