@@ -88,7 +88,7 @@ const Navbar = ({ setToken, userInfo, setUserInfo, setCart }) => {
                         component="div"
                         sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
                     >
-                        LOGO
+                        Clothes N Stuff
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
