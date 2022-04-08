@@ -11,6 +11,8 @@ import Products from '../components/Products/Products';
 import Product from '../components/Products/Product/Product';
 import Orders from '../components/Orders';
 
+jest.mock('axios')
+
 it('renders home page', () => {
     const { getByText } = render(<Home />);
     expect(getByText(/Welcome/i)).toBeInTheDocument();
