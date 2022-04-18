@@ -12,6 +12,8 @@ on:
 env: # Comment env block if you do not want to apply fixes
   # Apply linter fixes configuration
   APPLY_FIXES: none 
+  ENABLE_LINTERS: JAVASCRIPT_PRETTIER, COPYPASTE, CREDENTIALS, SPELL_CSPELL
+  
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
   cancel-in-progress: true
@@ -35,7 +37,7 @@ jobs:
         # More info at https://megalinter.github.io/flavors/
         uses: megalinter/megalinter@v5
         env:
-          ENABLE_LINTERS: JAVASCRIPT_STANDARD, COPYPASTE, CREDENTIALS, SPELL_CSPELL
+          ENABLE_LINTERS: JAVASCRIPT_PRETTIER, COPYPASTE, CREDENTIALS, SPELL_CSPELL
           VALIDATE_ALL_CODEBASE: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }} # Validates all source when push on main, else just the git diff with main. Override with true if you always want to lint all sources
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # ADD YOUR CUSTOM ENV VARIABLES HERE OR DEFINE THEM IN A FILE .mega-linter.yml AT THE ROOT OF YOUR REPOSITORY
